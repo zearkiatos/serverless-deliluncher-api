@@ -1,9 +1,18 @@
 {
   "scripts": {
     "build": "rm -rf public && mkdir public && echo 'Custom Build' > ./public/index.html",
-    "deploy:vercel": "vercel"
+    "deploy:vercel": "vercel",
+    "serverless:dev": "serverless offline --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
-    "dotenv": "^10.0.0"
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2",
+    "serverless": "^2.69.1"
+  },
+  "devDependencies": {
+    "serverless-offline": "^8.3.1"
   }
 }
