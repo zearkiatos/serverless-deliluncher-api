@@ -1,5 +1,9 @@
 {
   "scripts": {
-    "build": "rm -rf public && mkdir public && echo 'Custom Build' > ./public/index.html"
+    "build": "rm -rf public && mkdir public && echo 'Custom Build' > ./public/index.html",
+    "deploy:vercel": "vercel"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
   }
 }
