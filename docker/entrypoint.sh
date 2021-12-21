@@ -1,1 +1,1 @@
-make serverless-dev
+npm run dev:vercel

@@ -1,0 +1,39 @@
+image: node:15-alpine
+stages:
+  - install
+  - docker
+
+install-dependencies:
+  stage: install
+  script:
+    - apk update && apk add python make g++
+    - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+
+build-docker:
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+  services:
+  - docker:dind
+  stage: docker
+  environment: staging
+  cache:
+    paths:
+      - node_modules/
+  dependencies:
+    - install-dependencies
+  script:
+    - echo "Build docker 🐳"
+    - docker build . -t=serverless-deliluncher-api:glb-${CI_PIPELINE_IID}
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - build

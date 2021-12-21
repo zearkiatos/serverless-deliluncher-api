@@ -1,6 +1,8 @@
 # Description
 This is a project api in node 🟢 with a serverless or FaaS with vercel
 
+![Github](https://github.com/zearkiatos/serverless-deliluncher-api/actions/workflows/action.yml/badge.svg)
+
 # Custom Build Example
 
 This directory is a brief example of using a Custom Build script that can be deployed with Vercel and zero configuration.

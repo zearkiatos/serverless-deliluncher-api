@@ -9,6 +9,7 @@ COPY [".","/usr/src/app"]
 
 RUN npm install
 RUN npm install -g serverless
+RUN npm install -g vercel
 
 EXPOSE 3000
 
