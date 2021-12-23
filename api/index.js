@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const config = require("./config");
+const meals = require('./routes/meals');
+const orders = require('./routes/orders');
 
 const app = express();
 
@@ -14,7 +16,7 @@ mongoose.connect(config.MONGO_DATABASE_URI, {
   useUnifiedTopology: true
 });
 
-app.get('*', (request, response) => {
-  response.send('Hi human 🤖');
-});
+app.use('api/meals', meals);
+app.use('api/orders', orders);
+
 module.exports = app

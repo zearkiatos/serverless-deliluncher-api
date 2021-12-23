@@ -2,6 +2,7 @@
 This is a project api in node 🟢 with a serverless or FaaS with vercel
 
 ![Github](https://github.com/zearkiatos/serverless-deliluncher-api/actions/workflows/action.yml/badge.svg)
+![GitlabCI](https://gitlab.com/caprilespe/serverless-deliluncher-api/badges/develop/pipeline.svg)
 
 # Custom Build Example
 
