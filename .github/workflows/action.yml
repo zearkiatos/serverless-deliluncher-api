@@ -36,6 +36,6 @@ jobs:
     - name: Build docker 🐳
       run: docker build . -t=serverless-deliuncher-api:ghb-$GITHUB_RUN_NUMBER
     - name: Build Vercel 
-      run: y | vercel --token=${VERCEL_TOKEN}
+      run: vercel --token=${VERCEL_TOKEN} -y
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
