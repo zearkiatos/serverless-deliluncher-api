@@ -16,7 +16,7 @@ mongoose.connect(config.MONGO_DATABASE_URI, {
   useUnifiedTopology: true
 });
 
-app.use('api/meals', meals);
-app.use('api/orders', orders);
+app.use('/api/meals', meals);
+app.use('/api/orders', orders);
 
 module.exports = app

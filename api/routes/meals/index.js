@@ -1,20 +1,22 @@
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Meals = require("../../models/Meals");
-const app = express();
-const router = app.router();
+
+const router = express.Router();
 
 router.get("/", async (request, response) => {
   const meals = await Meals.find();
 
-  meals && response.status(StatusCodes.OK).send(meals);
+  console.log(meals);
+
+  response.status(StatusCodes.OK).send(meals);
 });
 
 router.get("/:id", async (request, response) => {
   const { id } = request.params;
   const meal = await Meals.findById(id);
 
-  meal && response.status(StatusCodes.OK).send(meal);
+  response.status(StatusCodes.OK).send(meal);
 });
 
 router.post("/", async (request, response) => {
@@ -24,7 +26,7 @@ router.post("/", async (request, response) => {
     description,
   });
 
-  meal && response.status(StatusCodes.CREATED).send(meal);
+  response.status(StatusCodes.CREATED).send(meal);
 });
 
 router.post("/", async (request, response) => {
@@ -34,7 +36,7 @@ router.post("/", async (request, response) => {
     description,
   });
 
-  meal && response.status(StatusCodes.CREATED).send(meal);
+  response.status(StatusCodes.CREATED).send(meal);
 });
 
 router.put("/:id", async (request, response) => {
