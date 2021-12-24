@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  db:
+    env_file:
+      - mongo.env
+    build:
+      context: .
+      dockerfile: mongo.Dockerfile
+    container_name: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27018:27017"
+    networks:
+      mongonetwork:
+  api:
+    env_file: 
+      - ".env.test"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: serverless-deliluncher-api
+    volumes: 
+      - ".:/usr/src/app"
+    ports:
+      - "3001:3000"
+    depends_on: 
+      - db
+    links:
+      - db
+    networks:
+      mongonetwork:
+networks:
+  mongonetwork:
+    driver: bridge
