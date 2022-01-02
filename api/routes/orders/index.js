@@ -20,8 +20,8 @@ router.get("/:id", async (request, response) => {
 router.post("/", async (request, response) => {
   const { mealId, userId } = request.body;
   const order = await Orders.create({
-    name,
-    description,
+    mealId,
+    userId,
   });
 
   response.status(StatusCodes.CREATED).send(order);
@@ -30,8 +30,8 @@ router.post("/", async (request, response) => {
 router.post("/", async (request, response) => {
   const { mealId, userId} = request.body;
   const order = await Orders.create({
-    name,
-    description,
+    mealId,
+    userId,
   });
 
   response.status(StatusCodes.CREATED).send(order);
@@ -41,8 +41,8 @@ router.put("/:id", async (request, response) => {
   const { mealId, userId } = request.body;
   const { id } = request.params;
   await Orders.findOneAndUpdate(id, {
-    name,
-    description,
+    mealId,
+    userId,
   });
 
   response.sendStatus(StatusCodes.NO_CONTENT);
