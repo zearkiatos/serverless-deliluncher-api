@@ -5,6 +5,7 @@ const cors = require("cors");
 const config = require("./config");
 const meals = require('./routes/meals');
 const orders = require('./routes/orders');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -18,5 +19,6 @@ mongoose.connect(config.MONGO_DATABASE_URI, {
 
 app.use('/api/meals', meals);
 app.use('/api/orders', orders);
+app.use('/api/auth', auth);
 
 module.exports = app
