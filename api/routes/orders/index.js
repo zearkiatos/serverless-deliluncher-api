@@ -18,7 +18,7 @@ router.get("/:id", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-  const { name, description } = request.body;
+  const { mealId, userId } = request.body;
   const order = await Orders.create({
     name,
     description,
@@ -28,7 +28,7 @@ router.post("/", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-  const { name, description } = request.body;
+  const { mealId, userId} = request.body;
   const order = await Orders.create({
     name,
     description,
@@ -38,7 +38,7 @@ router.post("/", async (request, response) => {
 });
 
 router.put("/:id", async (request, response) => {
-  const { name, description } = request.body;
+  const { mealId, userId } = request.body;
   const { id } = request.params;
   await Orders.findOneAndUpdate(id, {
     name,
