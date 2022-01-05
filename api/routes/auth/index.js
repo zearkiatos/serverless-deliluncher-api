@@ -4,13 +4,13 @@ const crypto = require("crypto");
 const Users = require("../../models/Users");
 
 const router = express.Router();
+const ITERATIONS = 1000;
+const KEYLEN = 64;
 
 router.post("/register", async (request, response) => {
   const { email, password } = request.body;
   crypto.randomBytes(16, (error, salt) => {
     const saltStringify = salt.toString("base64");
-    const ITERATIONS = 1000;
-    const KEYLEN = 64;
 
     crypto.pbkdf2(
       password,
@@ -39,7 +39,28 @@ router.post("/register", async (request, response) => {
 });
 
 router.post("/login", async (request, response) => {
-  response.send("I'm login");
+  const { email, password } = request.body;
+  Users.findOne({ email })
+    .exec()
+    .then((user) => {
+      !user && response.send("User or password wrong");
+      crypto.pbkdf2(
+        password,
+        user.salt,
+        ITERATIONS,
+        KEYLEN,
+        "sha1",
+        (error, key) => {
+          const encryptedPassword = key.toString("base64");
+          if (user.password === encryptedPassword) {
+            const token = signToken(user._id);
+            return response.send({ token });
+          }
+
+          return response.send('User or password wrong');
+        }
+      );
+    });
 });
 
 module.exports = router;
