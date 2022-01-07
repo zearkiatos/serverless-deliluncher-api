@@ -22,8 +22,8 @@ const isAuthenticated = (request, response, next) => {
   });
 };
 
-const hasRole = role => (request, response, next) => {
-  if (request.user.role === role) {
+const hasRoles = roles => (request, response, next) => {
+  if (roles.indexOf(request.user.role) > -1) {
     next();
   }
 
@@ -32,5 +32,5 @@ const hasRole = role => (request, response, next) => {
 
 module.exports = { 
   isAuthenticated,
-  hasRole
+  hasRoles
 };
