@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Users = require("../../models/Users");
 const config = require("../../config");
+const { isAuthenticated } = require("../../middlewares/auth");
 
 const router = express.Router();
 const ITERATIONS = 1000;
@@ -75,6 +76,10 @@ router.post("/login", async (request, response) => {
         }
       );
     });
+});
+
+router.get("/me", isAuthenticated, (request, response) => {
+  response.send(request.user);
 });
 
 module.exports = router;
