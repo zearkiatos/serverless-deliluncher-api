@@ -1,11 +1,25 @@
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Users = require("../../models/Users");
+const config = require("../../config");
 
 const router = express.Router();
 const ITERATIONS = 1000;
 const KEYLEN = 64;
+
+const signToken = (_id) => {
+  return jwt.sign(
+    {
+      _id
+    },
+    config.DELILUNCHER_SECRET,
+    {
+      expiresIn: config.EXPIRATION_TOKEN
+    }
+  );
+};
 
 router.post("/register", async (request, response) => {
   const { email, password } = request.body;
@@ -57,7 +71,7 @@ router.post("/login", async (request, response) => {
             return response.send({ token });
           }
 
-          return response.send('User or password wrong');
+          return response.send("User or password wrong");
         }
       );
     });

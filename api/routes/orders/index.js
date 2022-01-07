@@ -1,6 +1,7 @@
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Orders = require("../../models/Orders");
+const isAuthenticated = require("../../auth");
 
 const router = express.Router();
 
@@ -17,38 +18,29 @@ router.get("/:id", async (request, response) => {
   response.status(StatusCodes.OK).send(order);
 });
 
-router.post("/", async (request, response) => {
-  const { mealId, userId } = request.body;
+router.post("/", isAuthenticated, async (request, response) => {
+  const { _id } = request.user;
+  const { mealId } = request.body;
   const order = await Orders.create({
     mealId,
-    userId,
+    userId: _id
   });
 
   response.status(StatusCodes.CREATED).send(order);
 });
 
-router.post("/", async (request, response) => {
-  const { mealId, userId} = request.body;
-  const order = await Orders.create({
-    mealId,
-    userId,
-  });
-
-  response.status(StatusCodes.CREATED).send(order);
-});
-
-router.put("/:id", async (request, response) => {
+router.put("/:id", isAuthenticated, async (request, response) => {
   const { mealId, userId } = request.body;
   const { id } = request.params;
   await Orders.findOneAndUpdate(id, {
     mealId,
-    userId,
+    userId
   });
 
   response.sendStatus(StatusCodes.NO_CONTENT);
 });
 
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", isAuthenticated, async (request, response) => {
   const { id } = request.params;
   await Orders.findOneAndDelete(id);
 
