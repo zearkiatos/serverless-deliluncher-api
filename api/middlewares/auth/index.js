@@ -1,7 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
-const config = require("../config");
-const Users = require("../models/Users");
+const config = require("../../config");
+const Users = require("../../models/Users");
+
 const isAuthenticated = (request, response, next) => {
   const token = request.headers.authorization;
 
@@ -21,4 +22,15 @@ const isAuthenticated = (request, response, next) => {
   });
 };
 
-module.exports = isAuthenticated;
+const hasRole = role => (request, response, next) => {
+  if (request.user.role === role) {
+    next();
+  }
+
+  response.sendStatus(StatusCodes.FORBIDDEN);
+};
+
+module.exports = { 
+  isAuthenticated,
+  hasRole
+};

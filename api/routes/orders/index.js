@@ -1,7 +1,7 @@
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Orders = require("../../models/Orders");
-const isAuthenticated = require("../../auth");
+const { isAuthenticated } = require("../../middlewares/auth");
 
 const router = express.Router();
 
