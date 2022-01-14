@@ -28,6 +28,8 @@ jobs:
         echo "PORT=${PORT}" >> .env
         echo "MONGO_DATABASE_URI=${MONGO_DATABASE_URI}" >> .env
         echo "VERCEL_TOKEN=${VERCEL_TOKEN}" >> .env
+        echo "DELILUNCHER_SECRET=${DELILUNCHER_SECRET}" >> .env
+        echo "EXPIRATION_TOKEN=${EXPIRATION_TOKEN}" >> .env
       env:
         NODE_ENV: ${{ secrets.NODE_ENV }}
         PORT: ${{ secrets.PORT }}
