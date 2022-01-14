@@ -3,7 +3,7 @@
     "build": "rm -rf public && mkdir public && echo 'Custom Build' > ./public/index.html",
     "deploy:vercel": "vercel",
     "serverless:dev": "serverless offline --host 0.0.0.0 --port 3000",
-    "dev:vercel": "vercel dev --token=$VERCEL_TOKEN"
+    "dev:vercel": "vercel dev --token=bWx8PNtDefZCu9iyi9OgAAOy"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
