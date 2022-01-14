@@ -5,6 +5,6 @@ const config = {
     PORT: process.env.PORT,
     MONGO_DATABASE_URI: process.env.MONGO_DATABASE_URI,
     DELILUNCHER_SECRET: process.env.DELILUNCHER_SECRET,
-    EXPIRATION_TOKEN: process.env.EXPIRATION_TOKEN
+    EXPIRATION_TOKEN: parseInt(process.env.EXPIRATION_TOKEN)
 }
 module.exports = config;
