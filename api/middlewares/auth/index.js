@@ -11,14 +11,21 @@ const isAuthenticated = (request, response, next) => {
   }
 
   jwt.verify(token, config.DELILUNCHER_SECRET, (error, decoded) => {
-    const { _id } = decoded;
+    try {
+      const { _id } = decoded;
 
-    Users.findOne({ _id })
-      .exec()
-      .then((user) => {
-          request.user = user;
-          next();
-      });
+      Users.findOne({ _id })
+        .exec()
+        .then((user) => {
+            request.user = user;
+            next();
+        });
+    }
+    catch(ex) {
+      console.error(`Error: ${ex.message}`);
+      return response.send(StatusCodes.FORBIDDEN);
+    }
+
   });
 };
 
