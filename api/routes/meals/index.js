@@ -7,8 +7,6 @@ const router = express.Router();
 router.get("/", async (request, response) => {
   const meals = await Meals.find();
 
-  console.log(meals);
-
   response.status(StatusCodes.OK).send(meals);
 });
 
